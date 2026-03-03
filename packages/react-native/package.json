@@ -1,0 +1,31 @@
+{
+  "name": "@liverse/react-native",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --clean --dts --external react --external react-native --external react-native-webrtc"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-webrtc": ">=111.0.0"
+  },
+  "dependencies": {
+    "@liverse/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "@types/react": "^19.2.14",
+    "react-native": "^0.77.0"
+  }
+}

@@ -1,0 +1,21 @@
+# --- Build Outputs ---
+dist/
+lib/
+out/
+build/
+*.tsbuildinfo
+
+# --- Package Manager ---
+node_modules/
+.bun/
+# 만약 pnpm을 쓴다면
+.pnpm-debug.log*
+
+# --- Rust Specific ---
+/target/
+**/*.rs.bk
+Cargo.lock # 라이브러리 개발 시에는 보통 제외하지만, 최종 서비스(Binary)면 포함하기도 함
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db

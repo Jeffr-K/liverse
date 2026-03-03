@@ -16,13 +16,13 @@ async fn main() {
     dotenv().ok();
     tracing_subscriber::fmt::init();
 
-    let settings = Settings::new().expect("설정 파일 로드에 실패했습니다.");
+    let settings = Settings::new().expect("🚀 설정 파일 로드에 실패했습니다.");
 
     println!("🚀 Starting server with settings: {:?}", settings);
 
     let pool = session::create_pool(&settings.redis_url)
         .await
-        .expect("Redis 연결이 실패했습니다.");
+        .expect("🚀 Redis 연결이 실패했습니다.");
 
     let state = AppState::new(pool, settings.clone()).await;
 
@@ -32,7 +32,7 @@ async fn main() {
 
     let listener = TcpListener::bind("0.0.0.0:9090").await.unwrap();
 
-    println!("Signaling server listening on :9090");
+    println!("🚀 시그널링 서버가 포트:9090 에서 실행 중 입니다.");
 
     axum::serve(listener, app).await.unwrap();
 }

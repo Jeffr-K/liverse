@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext", // ✅ 최신 모듈 표준 대응
+    "moduleResolution": "NodeNext", // ✅ exports 필드 인식을 위해 필수
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ], // ✅ RTCPeerConnection 인식을 위해 DOM 추가
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

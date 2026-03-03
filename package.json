@@ -1,0 +1,7 @@
+{
+  "name": "liverse-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

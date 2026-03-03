@@ -1,0 +1,36 @@
+{
+  "name": "@liverse/react",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsup src/index.tsx --format cjs,esm --watch --dts --external react",
+    "build": "tsup src/index.tsx --format cjs,esm --clean --dts --minify --external react"
+  },
+  "keywords": [
+    "webrtc",
+    "liverse",
+    "react",
+    "sdk"
+  ],
+  "author": "anonymous.rs",
+  "license": "MIT",
+  "description": "Liverse React SDK for WebRTC streaming",
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@liverse/core": "workspace:*",
+    "react": "^19.2.4"
+  }
+}
