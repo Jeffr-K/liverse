@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+
+  # b2c:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/b2b/Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - VITE_SIGNALING_URL=ws://localhost:9090
+  #     - VITE_LIVEKIT_URL=http://localhost:7880
+  #   networks:
+  #     - liverse-network
+
+  # backend:
+  #   build:
+  #     context: ./apps/backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgresql
+  #     - redis
+  #   networks:
+  #     - liverse-network
+
+  # signaling-server:
+  #   build:
+  #     context: ./services/signal
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "9090:9090"
+  #   environment:
+  #     - RUST_LOG=debug
+  #     - REDIS_URL=redis://redis:6379
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - liverse-network
+
+  media-server:
+    image: livekit/livekit-server:latest
+    container_name: liverse-sfu
+    command: --config /etc/livekit.yaml
+    ports:
+      - "7880:7880"
+      - "50000-50050:50000-50050/udp"
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml
+    networks:
+      - liverse-network
+
+  redis:
+    image: redis:latest
+    container_name: liverse-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - liverse-network
+    command: ["redis-server", "--maxmemory", "512mb", "--maxmemory-policy", "allkeys-lru"]
+
+  postgresql:
+    image: postgres:18
+    environment:
+      - POSTGRES_USER=liverse
+      - POSTGRES_PASSWORD=liverse
+      - POSTGRES_DB=liverse_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/18/docker
+    networks:
+      - liverse-network
+
+networks:
+  liverse-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  redis_data:
+  livekit.yaml:
