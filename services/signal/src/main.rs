@@ -14,6 +14,10 @@ type RedisPool = bb8::Pool<bb8_redis::RedisConnectionManager>;
 #[tokio::main]
 async fn main() {
     dotenv().ok();
+    println!(
+        "DEBUG: SIGNAL_REDIS_URL = {:?}",
+        std::env::var("SIGNAL_REDIS_URL")
+    );
     tracing_subscriber::fmt::init();
 
     let settings = Settings::new().expect("🚀 설정 파일 로드에 실패했습니다.");
